@@ -47,6 +47,18 @@ repositories {
 }
 
 
+static def getCommitHash() {
+    'git rev-parse --verify --short HEAD'.execute().text.trim()
+}
+
+/*
+ * Does not work in GitHub Actions/Workflows.
+ */
+static def getBranchName() {
+    'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+}
+
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.fasterxml.jackson.module:jackson-module-kotlin')
@@ -83,8 +95,19 @@ from {
     image = 'openjdk:alpine'
   }
   to {
-    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:parameter'
+    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:param'.toString() + getCommitHash()
     credHelper = 'ecr-login'
+
+	 switch (System.getenv('GIT_BRANCH')) {
+            case 'refs/heads/master':
+                tags = ['latest']
+                break
+            case 'refs/heads/dev':
+                tags = ['dev-latest']
+                break
+            default:
+                project.logger.lifecycle('Unknown Branch: ' + System.getenv('GIT_BRANCH'))
+        }
     //tags = [env]
   }
   container {
