@@ -95,7 +95,7 @@ from {
     image = 'openjdk:alpine'
   }
   to {
-    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:jibimage-'.toString() + getBranchName() + getCommitHash()
+    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:jibimage-'.toString() + getBranchName() + ' ' + getCommitHash()
     credHelper = 'ecr-login'
 	//  switch (System.getenv('GIT_BRANCH')) {
     //         case 'refs/heads/master':
