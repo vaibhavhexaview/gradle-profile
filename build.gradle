@@ -95,19 +95,19 @@ from {
     image = 'openjdk:alpine'
   }
   to {
-    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:param'.toString() + getCommitHash()
+    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:jibimage'.toString() + getCommitHash()
     credHelper = 'ecr-login'
 
-	 switch (System.getenv('GIT_BRANCH')) {
-            case 'refs/heads/master':
-                tags = ['latest']
-                break
-            case 'refs/heads/dev':
-                tags = ['dev-latest']
-                break
-            default:
-                project.logger.lifecycle('Unknown Branch: ' + System.getenv('GIT_BRANCH'))
-        }
+	//  switch (System.getenv('GIT_BRANCH')) {
+    //         case 'refs/heads/master':
+    //             tags = ['latest']
+    //             break
+    //         case 'refs/heads/dev':
+    //             tags = ['dev-latest']
+    //             break
+    //         default:
+    //             project.logger.lifecycle('Unknown Branch: ' + System.getenv('GIT_BRANCH'))
+    //     }
     //tags = [env]
   }
   container {
