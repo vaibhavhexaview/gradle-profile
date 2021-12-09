@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rebalserver
+spec:
+  selector:
+    matchLabels:
+      app: rebalserver
+  template:
+    metadata:
+      labels:
+        app: rebalserver
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: rebalserver
+          image: 987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:parameter
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
