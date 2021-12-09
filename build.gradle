@@ -88,7 +88,7 @@ from {
     //tags = [env]
   }
   container {
-    jvmFlags = ['-Penvironment=dev', '-Xms512m', '-Xdebug']
+    jvmFlags = ['-Xms512m', '-Xdebug']
     mainClass = 'mypackage.MyApp'
     //args = [env]
     //ports = ['1000', '2000-2003/udp']
