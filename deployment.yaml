@@ -14,7 +14,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: rebalserver
-          image: 987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:parameter
+          image: 987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:{{TAG}}
           imagePullPolicy: Always
           ports:
           - containerPort: 80
