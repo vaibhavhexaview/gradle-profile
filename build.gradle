@@ -113,7 +113,7 @@ from {
     jvmFlags = ['-Xms512m', '-Xdebug']
     mainClass = 'mypackage.MyApp'
     //args = [env]
-    //ports = ['1000', '2000-2003/udp']
+    //ports = ['1000']
     labels = [key2:'value2']
     //format = 'OCI'
   }
