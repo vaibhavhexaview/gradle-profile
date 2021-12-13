@@ -111,10 +111,10 @@ from {
   }
   container {
     jvmFlags = ['-Xms512m', '-Xdebug']
-    mainClass = 'mypackage.MyApp'
+    //mainClass = 'mypackage.MyApp'
     //args = [env]
     //ports = ['1000']
-    labels = [key2:'value2']
+    //labels = [key2:'value2']
     //format = 'OCI'
   }
 }
