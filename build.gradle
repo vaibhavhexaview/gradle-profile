@@ -13,8 +13,6 @@ buildscript {
 	}
 }
 
-
-
 plugins {
   id 'com.google.cloud.tools.jib' version '3.1.4'
 }
@@ -51,9 +49,6 @@ static def getCommitHash() {
     'git rev-parse --verify --short HEAD'.execute().text.trim()
 }
 
-/*
- * Does not work in GitHub Actions/Workflows.
- */
 static def getBranchName() {
     'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
 }
@@ -68,28 +63,7 @@ dependencies {
 }
 
 
-/**
- * This task copies content of properties file mentioned in command and saves it to application.properties in src directory as well as in build directory.
- */
-
 jib {
-
-//String env = project.getProperty("prop")
-
-	// 	delete 'build'
-	// doLast {
-	// 	copy {
-	// 		from('src/main/resources') {
-	// 			include "*-${environment}.*"
-	// 		}
-	// 		into('build/resources/main')
-	// 		into ('src/main/resources')
-
-	// 		rename { String fileName ->
-	// 			fileName.replace('-' + environment, '')
-	// 		}
-	// 	}
-	// }
 
 from {
     image = 'openjdk:alpine'
@@ -97,41 +71,9 @@ from {
   to {
     image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:jibimage-'.toString() + getBranchName() + '-' + getCommitHash()
     credHelper = 'ecr-login'
-	//  switch (System.getenv('GIT_BRANCH')) {
-    //         case 'refs/heads/master':
-    //             tags = ['latest']
-    //             break
-    //         case 'refs/heads/dev':
-    //             tags = ['dev-latest']
-    //             break
-    //         default:
-    //             project.logger.lifecycle('Unknown Branch: ' + System.getenv('GIT_BRANCH'))
-    //     }
-    //tags = [env]
+
   }
-  container {
-    jvmFlags = ['-Xms512m', '-Xdebug']
-    //mainClass = 'mypackage.MyApp'
-    //args = [env]
-    //ports = ['1000']
-    //labels = [key2:'value2']
-    //format = 'OCI'
-  }
+
 }
 
-// task profileSetup {
-// 	delete 'build'
-// 	doLast {
-// 		copy {
-// 			from('src/main/resources') {
-// 				include "*-${environment}.*"
-// 			}
-// 			into('build/resources/main')
-// 			into ('src/main/resources')
 
-// 			rename { String fileName ->
-// 				fileName.replace('-' + environment, '')
-// 			}
-// 		}
-// 	}
-// }
