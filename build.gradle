@@ -45,13 +45,13 @@ repositories {
 }
 
 
-static def getCommitHash() {
-    'git rev-parse --verify --short HEAD'.execute().text.trim()
-}
+// static def getCommitHash() {
+//     'git rev-parse --verify --short HEAD'.execute().text.trim()
+// }
 
-static def getBranchName() {
-    'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
-}
+// static def getBranchName() {
+//     'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+// }
 
 
 dependencies {
@@ -62,6 +62,8 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
+String bn = System.getProperty("bn")
+String ci = System.getProperty("ci")
 
 jib {
 
@@ -69,7 +71,7 @@ from {
     image = 'openjdk:alpine'
   }
   to {
-    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:'.toString() + getBranchName() + '-' + getCommitHash()
+    image = '987429592769.dkr.ecr.ap-south-1.amazonaws.com/addepar/poc:${bn}_${ci}'  //.toString() + getBranchName() + '-' + getCommitHash()
     credHelper = 'ecr-login'
 
   }
