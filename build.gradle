@@ -65,8 +65,6 @@ dependencies {
 String bn = System.getProperty("bn")
 String ci = System.getProperty("ci")
 
-Print ${bn}
-Print ${ci}
 
 jib {
 
